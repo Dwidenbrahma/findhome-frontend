@@ -28,10 +28,9 @@
 }
 
 .recent {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+}
+.bt {
+  margin-top: 90px;
 }
 
 .item {
@@ -77,14 +76,80 @@
   display: flex;
   flex-direction: column;
   margin: 10px;
+  position: absolute;
+  width: 60%;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  background-color: #fff;
+  cursor: pointer;
 }
-
+.reviewTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 10px;
+  background-color: orangered;
+  color: #fff;
+}
 .textarea {
   font-size: 15px;
   color: grey;
   padding: 4px;
 }
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
 
+.modal {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 400px;
+  max-width: 90%;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.reviewTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.closeBtn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.textarea {
+  width: 100%;
+  height: 100px;
+  margin-top: 10px;
+}
+
+.btn {
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #ec635e;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+.link {
+  color: #fff;
+  text-decoration: none;
+}
 @media screen and (min-width: 768px) {
   .profile {
     display: flex;
@@ -98,8 +163,17 @@
 
   .recent {
     padding: 2em;
-    display: grid;
-    grid-template-columns: auto auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  .item {
+    width: 70%;
+  }
+  .img {
+    height: 30vh;
+    object-fit: cover;
   }
 }
 
@@ -109,7 +183,16 @@
   }
   .recent {
     padding: 2em;
-    display: grid;
-    grid-template-columns: auto auto auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  .item {
+    width: 70%;
+  }
+  .img {
+    height: 30vh;
+    object-fit: cover;
   }
 }

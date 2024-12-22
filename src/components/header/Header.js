@@ -1,13 +1,12 @@
 import homeImage from "../../img/house.png";
 import menu from "../../img/menus.png";
 import close from "../../img/close.png";
-import Header from "./Header.module.css";
-
+import header from "./Header.module.css";
 import { Link } from "react-router-dom";
 import { useState, useContext } from "react";
 import { AuthContext } from "../AuthContext";
 
-const Nav = () => {
+const Header = () => {
   const [show, setShow] = useState(false);
   const { token } = useContext(AuthContext);
 
@@ -21,44 +20,44 @@ const Nav = () => {
 
   return (
     <>
-      <nav className={Header.nav}>
+      <nav className={header.nav}>
         <Link to="/">
-          <div className={Header.right}>
-            <img className={Header.logo} src={homeImage} alt="Home_image" />
+          <div className={header.right}>
+            <img className={header.logo} src={homeImage} alt="Home_image" />
           </div>
         </Link>
 
-        <div className={`${Header.left} ${show ? Header.show : ""}`}>
-          <div className={Header.close}>
+        <div className={`${header.left} ${show ? header.show : ""}`}>
+          <div className={header.close}>
             <img
               onClick={handleClose}
-              className={Header.closelogo}
+              className={header.closelogo}
               src={close}
               alt="Close_menu"
             />
           </div>
 
-          <ul className={Header.ul}>
-            <li className={Header.li}>
-              <Link className={Header.link} to="/">
+          <ul className={header.ul}>
+            <li className={header.li}>
+              <Link className={header.link} to="/">
                 Home
               </Link>
             </li>
             {token ? (
-              <li className={Header.li}>
-                <Link className={Header.link} to="/user/dashbord">
-                  Profile
+              <li className={header.li}>
+                <Link className={header.link} to="/user/dashbord">
+                  profile
                 </Link>
               </li>
             ) : (
               <>
-                <li className={Header.li}>
-                  <Link className={Header.link} to="/login">
+                <li className={header.li}>
+                  <Link className={header.link} to="/login">
                     Login
                   </Link>
                 </li>
-                <li className={Header.li}>
-                  <Link className={Header.link} to="/register">
+                <li className={header.li}>
+                  <Link className={header.link} to="/register">
                     Register
                   </Link>
                 </li>
@@ -67,37 +66,37 @@ const Nav = () => {
           </ul>
         </div>
 
-        <div className={Header.line}>
+        <div className={header.line}>
           <img
             onClick={handleClick}
-            className={Header.hamberger}
+            className={header.hamberger}
             src={menu}
             alt="Menu"
           />
         </div>
 
-        <div className={Header.toShow}>
-          <ul className={Header.uli}>
-            <li className={Header.lii}>
-              <Link className={Header.link} to="/">
+        <div className={header.toShow}>
+          <ul className={header.uli}>
+            <li className={header.lii}>
+              <Link className={header.link} to="/">
                 Home
               </Link>
             </li>
             {token ? (
-              <li className={Header.lii}>
-                <Link className={Header.link} to="/user/dashbord">
+              <li className={header.lii}>
+                <Link className={header.link} to="/user/dashbord">
                   profile
                 </Link>
               </li>
             ) : (
               <>
-                <li className={Header.lii}>
-                  <Link className={Header.link} to="/login">
+                <li className={header.lii}>
+                  <Link className={header.link} to="/login">
                     Login
                   </Link>
                 </li>
-                <li className={Header.lii}>
-                  <Link className={Header.link} to="/register">
+                <li className={header.lii}>
+                  <Link className={header.link} to="/register">
                     Register
                   </Link>
                 </li>
@@ -110,4 +109,4 @@ const Nav = () => {
   );
 };
 
-export default Nav;
+export default Header;

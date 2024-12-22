@@ -4,6 +4,7 @@ import axios from "axios";
 import Nav from "../header/Header";
 //import Footer from "../footer/Footer";
 import url from "../../url";
+import formCss from "./Form.module.css";
 
 const Form = () => {
   const navigate = useNavigate();
@@ -52,30 +53,34 @@ const Form = () => {
       <header>
         <Nav />
       </header>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Start Date:
-          <input
-            type="date"
-            name="startDate"
-            value={formData.startDate}
-            onChange={handleChange}
-            required
-          />
-        </label>
-        <label>
-          End Date:
-          <input
-            type="date"
-            name="endDate"
-            value={formData.endDate}
-            onChange={handleChange}
-            required
-          />
-        </label>
-        <button type="submit">Reserve</button>
-        {message && <p>{message}</p>}
-      </form>
+      <main className={formCss.main}>
+        {" "}
+        <form className={formCss.form} onSubmit={handleSubmit}>
+          <label>
+            Start Date:
+            <input
+              type="date"
+              name="startDate"
+              value={formData.startDate}
+              onChange={handleChange}
+              required
+            />
+          </label>
+          <label>
+            End Date:
+            <input
+              type="date"
+              name="endDate"
+              value={formData.endDate}
+              onChange={handleChange}
+              required
+            />
+          </label>
+          <button type="submit">Reserve</button>
+          {message && <p>{message}</p>}
+        </form>
+      </main>
+
       <footer>{/* <Footer /> */}</footer>
     </>
   );

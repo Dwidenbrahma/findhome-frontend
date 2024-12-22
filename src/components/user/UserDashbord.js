@@ -3,11 +3,11 @@ import Footer from "../footer/Footer";
 import Header from "../header/Header";
 import user from "./UserDashbord.module.css";
 import { AuthContext } from "../AuthContext";
-import { Navigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import axios from "axios";
 import url from "../../url";
 
-const Review = ({ onSubmit }) => {
+const Review = ({ onSubmit, onClose }) => {
   const [reviewText, setReviewText] = useState("");
 
   const handleSubmit = () => {
@@ -18,20 +18,29 @@ const Review = ({ onSubmit }) => {
   };
 
   return (
-    <div className={user.review}>
-      <textarea
-        className={user.textarea}
-        value={reviewText}
-        onChange={(e) => setReviewText(e.target.value)}></textarea>
-      <button className={user.btn} onClick={handleSubmit}>
-        Submit Review
-      </button>
+    <div className={user.modalOverlay}>
+      <div className={user.modal}>
+        <div className={user.reviewTop}>
+          <h3>Write a Review</h3>
+          <button className={user.closeBtn} onClick={onClose}>
+            &times;
+          </button>
+        </div>
+
+        <textarea
+          className={user.textarea}
+          value={reviewText}
+          onChange={(e) => setReviewText(e.target.value)}></textarea>
+        <button className={user.btn} onClick={handleSubmit}>
+          Submit Review
+        </button>
+      </div>
     </div>
   );
 };
 
 const UserDashbord = () => {
-  const [showReview, setShowReview] = useState(false);
+  const [reviewVisibility, setReviewVisibility] = useState([]); // State to manage visibility of reviews
   const { token, loading } = useContext(AuthContext);
   const [userData, setUserData] = useState(null);
   const [bookingData, setBookingData] = useState([]);
@@ -49,6 +58,11 @@ const UserDashbord = () => {
 
         setUserData(response.data.user);
         setBookingData(response.data.bookings);
+
+        // Initialize the reviewVisibility state for each booking (false by default)
+        setReviewVisibility(
+          new Array(response.data.bookings.length).fill(false)
+        );
       } catch (err) {
         setError(
           err.response?.data?.message || "Error fetching dashboard data"
@@ -75,38 +89,54 @@ const UserDashbord = () => {
 
   const handleReviewSubmit = (reviewText) => {
     console.log("Review submitted:", reviewText); // Handle the review submission (e.g., send it to the backend)
-    setShowReview(false); // Close the review form after submission
+    // Here you can send the review to the backend
   };
-  console.log(userData);
-  console.log(bookingData);
+  const handleClose = () => {
+    setReviewVisibility((prevVisibility) => {
+      const newVisibility = [...prevVisibility];
+      newVisibility.fill(false); // Close all open review modals
+      return newVisibility;
+    });
+  };
+
+  const toggleReviewVisibility = (index) => {
+    setReviewVisibility((prevVisibility) => {
+      const newVisibility = [...prevVisibility];
+      newVisibility[index] = !newVisibility[index]; // Toggle visibility of the review popup
+      return newVisibility;
+    });
+  };
 
   return (
     <>
       <header>
         <Header />
-        <button onClick={handleLogout}>Logout</button>
+        <button className={user.bt} onClick={handleLogout}>
+          Logout
+        </button>
       </header>
       <main>
         <div className={user.container}>
           <div className={user.profile}>
-            <img
-              src={`http://localhost:4000/${userData?.profileImage}`}
-              alt="user-profile"
-            />
+            <img src={`${url}${userData?.profileImage}`} alt="user-profile" />
             <div className={user.inside}>
               <p className={user.p3}>{userData?.name}</p>
               <p className={user.p2}>{userData?.email}</p>
               <p className={user.p2}>{userData?.phone}</p>
             </div>
           </div>
-
+          <h1>Recent Booking</h1>
           <div className={user.recent}>
             {bookingData.length > 0 ? (
-              bookingData.map((booking) => (
+              bookingData.map((booking, index) => (
                 <div className={user.item} key={booking._id}>
                   <img
                     className={user.img}
-                    src={`http://localhost:4000/${booking.house?.images?.[0]}`} // Use actual house image or placeholder
+                    src={`${url}${
+                      booking.house?.images && booking.house?.images[0]
+                        ? booking.house.images[0]
+                        : "default-image.jpg"
+                    }`}
                     alt="booking"
                   />
                   <div className={user.des}>
@@ -116,16 +146,35 @@ const UserDashbord = () => {
                     </span>
                     <p className={user.p}>
                       Total{" "}
-                      <span className={user.span2}>${booking.totalPrice}</span>
+                      <span className={user.span2}>
+                        {new Intl.NumberFormat("hi-IN", {
+                          style: "currency",
+                          currency: "INR",
+                        }).format(booking.totalPrice)}{" "}
+                      </span>
                     </p>
                     <button className={user.btn}>Download Invoice</button>
                     <button
-                      onClick={() => setShowReview(!showReview)}
+                      onClick={() => toggleReviewVisibility(index)}
                       className={user.btn}>
-                      {showReview ? "Cancel Review" : "Write Review"}
+                      {reviewVisibility[index]
+                        ? "Cancel Review"
+                        : "Write Review"}
+                    </button>
+                    <button className={user.btn}>
+                      <Link
+                        className={user.link}
+                        to={`/reserve/${booking._id}`}>
+                        Book Again
+                      </Link>
                     </button>
                   </div>
-                  {showReview && <Review onSubmit={handleReviewSubmit} />}
+                  {reviewVisibility[index] && (
+                    <Review
+                      onSubmit={handleReviewSubmit}
+                      onClose={handleClose}
+                    />
+                  )}
                 </div>
               ))
             ) : (

@@ -39,7 +39,7 @@ const Info = () => {
         {" "}
         <Header />
       </header>{" "}
-      <main>
+      <main className={info.main}>
         {" "}
         <div className={info.top}>
           <ImgGallery src={homeData.images} />
