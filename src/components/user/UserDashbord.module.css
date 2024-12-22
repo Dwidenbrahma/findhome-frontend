@@ -27,10 +27,15 @@
   font-weight: 600;
 }
 
+<<<<<<< HEAD
 /* .recent {
  
 
 } */
+=======
+.recent {
+}
+>>>>>>> 42f3b81d9aed51ec78bccb205b2368acd83c9a12
 .bt {
   margin-top: 90px;
 }
