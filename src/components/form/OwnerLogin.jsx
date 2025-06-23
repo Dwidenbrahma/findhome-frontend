@@ -117,9 +117,9 @@ const OwnerLogin = () => {
           </Link>
           <p className="text-sm text-gray-600 mt-2">
             Don't have an account?{" "}
-            <a href="/owner/signup" className="text-blue-500 hover:underline">
+            <Link to="/owner/signup" className="text-blue-500 hover:underline">
               Sign Up
-            </a>
+            </Link>
           </p>
         </div>
 
