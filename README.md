@@ -6,7 +6,7 @@ FindHome is a modern real estate platform that enables users to explore, book, a
 
 ## 🌐 Live Site
 
-Frontend (Vercel): [https://findhome-frontend.vercel.app](https://findhome-frontend.vercel.app)  
+Frontend (Vercel): [https://findhome-frontend.vercel.app](https://findhome-frontend-naqjhk7u4-dwidens-projects.vercel.app/)  
 Backend (GitHub): [FindHome Backend](https://github.com/Dwidenbrahma/findhome-backend)
 
 ---
@@ -58,7 +58,4 @@ npm install
 REACT_APP_API_URL=https://your-backend-url.com
 npm start
 ```
-# Backend 
-[#](https://github.com/Dwidenbrahma/findhome-backend)
-# Live site
-[#](https://findhome-frontend-naqjhk7u4-dwidens-projects.vercel.app/)
+
