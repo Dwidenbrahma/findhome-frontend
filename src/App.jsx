@@ -60,8 +60,8 @@ function App() {
                   {/* <Route path="/user/payement" element={<StudentCard />} /> */}
 
                   {/* Owner routes */}
-                  <Route path="/owner/Login" element={<OwnerLogin />} />
-                  <Route path="/owner/SignUp" element={<Owner />} />
+                  <Route path="/owner/login" element={<OwnerLogin />} />
+                  <Route path="/owner/signup" element={<Owner />} />
                   <Route path="/owner/dash/posthome" element={<HousePost />} />
                   <Route path="/owner/dash" element={<OwnerDashboard />} />
                   <Route
