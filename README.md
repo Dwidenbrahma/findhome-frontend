@@ -6,7 +6,7 @@ FindHome is a modern real estate platform that enables users to explore, book, a
 
 ## 🌐 Live Site
 
-Frontend (Vercel): [https://findhome-frontend.vercel.app](https://findhome-frontend-naqjhk7u4-dwidens-projects.vercel.app/)  
+Frontend (Vercel): [https://findhome-frontend.vercel.app](https://findhome-frontend.vercel.app/)  
 Backend (GitHub): [FindHome Backend](https://github.com/Dwidenbrahma/findhome-backend)
 
 ---
