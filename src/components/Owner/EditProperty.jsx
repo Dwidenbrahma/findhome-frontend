@@ -297,7 +297,7 @@ const EditProperty = () => {
                   {property.images.map((img, index) => (
                     <div key={index}>
                       <img
-                        src={`${url}${img}`}
+                        src={img.startsWith("http") ? img : `${url}${img}`}
                         alt={`Property ${index}`}
                         className="object-cover w-full h-80 sm:h-[400px] md:h-[500px]"
                       />

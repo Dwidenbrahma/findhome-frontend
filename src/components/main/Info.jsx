@@ -355,28 +355,29 @@ const Info = () => {
               </div>
             </div> */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              {(homeData.amenities[0]?.split(",") || []).map(
-                (amenityRaw, index) => {
-                  const amenity = amenityRaw.trim().toLowerCase();
-                  const Icon = amenityIcons[amenity] || DefaultIcon; // Get the corresponding icon
-                  return (
-                    <div
-                      key={index}
-                      className="flex items-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
-                      <div className="bg-indigo-100 p-3 rounded-full mr-3">
-                        {Icon ? (
-                          <Icon className="text-indigo-600 text-xl" />
-                        ) : (
-                          <span className="text-indigo-600 text-sm font-bold">
-                            {amenity.charAt(0).toUpperCase()}
-                          </span>
-                        )}
-                      </div>
-                      <p className="text-gray-700 capitalize">{amenity}</p>
+              {(
+                homeData.amenities[0]?.replace(/^\[|\]$/g, "").split(",") || []
+              ).map((amenityRaw, index) => {
+                const amenity = amenityRaw.trim().toLowerCase();
+                const Icon = amenityIcons[amenity] || DefaultIcon;
+
+                return (
+                  <div
+                    key={index}
+                    className="flex items-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+                    <div className="bg-indigo-100 p-3 rounded-full mr-3">
+                      {Icon ? (
+                        <Icon className="text-indigo-600 text-xl" />
+                      ) : (
+                        <span className="text-indigo-600 text-sm font-bold">
+                          {amenity.charAt(0).toUpperCase()}
+                        </span>
+                      )}
                     </div>
-                  );
-                }
-              )}
+                    <p className="text-gray-700 capitalize">{amenity}</p>
+                  </div>
+                );
+              })}
             </div>
           </div>
 
@@ -394,7 +395,9 @@ const Info = () => {
                         <img
                           src={
                             review.user?.profileImage
-                              ? `${url}${review.user.profileImage}`
+                              ? review.user.profileImage.startsWith("http")
+                                ? review.user.profileImage
+                                : `${url}${review.user.profileImage}`
                               : `${url}default-profile.png`
                           }
                           alt="User"

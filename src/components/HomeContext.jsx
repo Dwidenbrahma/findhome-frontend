@@ -16,19 +16,28 @@ export const HomeProvider = ({ children }) => {
     const fetchHomes = async () => {
       setIsLoading(true);
       try {
-        // Fetch all data once
         const response = await axios.get(`${url}`);
-        setHomeData(response.data);
-        setFilteredHomes(response.data); // Initially, show all homes
+
+        const homesArray = Array.isArray(response.data)
+          ? response.data
+          : Array.isArray(response.data.homes)
+          ? response.data.homes
+          : [];
+
+        setHomeData(homesArray);
+        setFilteredHomes(homesArray);
       } catch (error) {
         console.error("Error fetching homes:", error);
+        setHomeData([]);
+        setFilteredHomes([]);
       } finally {
         setIsLoading(false);
       }
     };
 
     fetchHomes();
-  }, []); // Fetch once when component mounts
+  }, []);
+  // Fetch once when component mounts
 
   useEffect(() => {
     let filtered = homeData;

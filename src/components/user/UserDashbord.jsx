@@ -177,10 +177,15 @@ const UserDashbord = () => {
             <div className="flex flex-col md:flex-row items-center justify-between">
               <div className="flex flex-col md:flex-row items-center">
                 <img
-                  src={`${url}${userData?.profileImage}`}
+                  src={
+                    userData?.profileImage?.startsWith("http")
+                      ? userData.profileImage
+                      : `${url}${userData?.profileImage}`
+                  }
                   alt="user-profile"
                   className="w-32 h-32 rounded-full object-cover border-4 border-gray-200"
                 />
+
                 <div className="ml-0 md:ml-6 mt-4 md:mt-0 text-center md:text-left">
                   <p className="text-2xl font-bold text-gray-800">
                     {userData?.name}

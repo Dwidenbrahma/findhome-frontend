@@ -110,13 +110,13 @@ const PanoramicViewer = () => {
     if (homeData[room]) {
       const firstImage = homeData[room][0];
       setSelectedImage(firstImage);
-      setImage(`${url}${firstImage}`);
+      setImage(getSafeImageUrl(firstImage)); // ✅ fixed here
     }
   };
 
   const handleImageSelection = (img) => {
     setSelectedImage(img);
-    setImage(`${url}${img}`);
+    setImage(getSafeImageUrl(img)); // ✅ fixed here
   };
 
   const handleGoBack = () => {

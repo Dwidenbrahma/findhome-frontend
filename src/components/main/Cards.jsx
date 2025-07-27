@@ -65,7 +65,11 @@ const Card = () => {
               <div className="relative">
                 <div className="h-56 overflow-hidden">
                   <img
-                    src={`${url}${home.images[0]}`}
+                    src={
+                      home.images[0]?.startsWith("http")
+                        ? home.images[0]
+                        : `${url}${home.images[0]}`
+                    }
                     alt={`house in ${home.location}`}
                     className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
                   />

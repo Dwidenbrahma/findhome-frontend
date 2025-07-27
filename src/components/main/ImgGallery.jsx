@@ -29,7 +29,9 @@ const ImgGallery = ({ src }) => {
         <img
           className="w-full h-full object-cover transition-opacity duration-500 rounded-xl"
           key={src[index]}
-          src={`${url}${src[index]}`}
+          src={
+            src[index].startsWith("http") ? src[index] : `${url}${src[index]}`
+          }
           alt={`findhome ${index + 1}`}
         />
       </div>

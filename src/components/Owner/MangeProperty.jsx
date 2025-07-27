@@ -57,12 +57,15 @@ const ManageProperty = () => {
               <img
                 src={
                   property.images?.[0]
-                    ? `${url}${property.images[0]}`
+                    ? property.images[0].startsWith("http")
+                      ? property.images[0]
+                      : `${url}${property.images[0]}`
                     : "https://via.placeholder.com/400x200?text=No+Image"
                 }
                 alt="property"
                 className="w-full h-40 object-cover rounded mb-4"
               />
+
               <h2 className="text-xl font-semibold mb-2">{property.title}</h2>
               <p className="text-gray-600 mb-1">
                 {property.city}, {property.state}

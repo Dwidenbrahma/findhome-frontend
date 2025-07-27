@@ -292,7 +292,6 @@ const HousePost = () => {
                     className="w-full mt-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                     <option value="Apartment">Apartment</option>
                     <option value="Flat">Flat</option>
-                    <option value="House">House</option>
                     <option value="Villa">Villa</option>
                     <option value="Hotel">Hotel</option>
                   </select>

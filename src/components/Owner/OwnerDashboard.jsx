@@ -173,7 +173,7 @@ const OwnerDashboard = () => {
               <img
                 src={
                   ownerData?.profileImage
-                    ? `${url}${ownerData.profileImage}`
+                    ? ownerData.profileImage // ✅ Use directly
                     : `https://ui-avatars.com/api/?name=${encodeURIComponent(
                         ownerData?.name || "Owner"
                       )}&background=6366f1&color=fff`
