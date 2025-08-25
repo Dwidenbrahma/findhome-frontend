@@ -64,7 +64,7 @@ const Owner = () => {
 
   useEffect(() => {
     if (index != null) {
-      console.log(index);
+      // console.log(index);
     }
   }, [index]);
 
